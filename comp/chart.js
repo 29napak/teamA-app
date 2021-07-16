@@ -83,7 +83,7 @@ export default class ChartView extends React.Component {
 
 
         const data = {
-            labels: tempData,
+            // labels: tempData,
             datasets: [
                 {
                     data: tempData,

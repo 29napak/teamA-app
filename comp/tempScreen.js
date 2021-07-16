@@ -3,17 +3,17 @@
 
 
 import React, { Component } from 'react';
-import { StyleSheet, ActivityIndicator, View, Text } from 'react-native';
+import { StyleSheet, ActivityIndicator, View, Text, ScrollView } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements'
 import firebase from '../database/firebaseDb';
 import ChartView from './chart';
 
 
-class tempScreen extends Component {
+class TempScreen extends Component {
 
     constructor() {
         super();
-        this.firestoreRef = firebase.firestore().collection("user").orderBy('date', 'desc').limit(5);
+        this.firestoreRef = firebase.firestore().collection("user").orderBy('date', 'desc').limit(10);
         this.state = {
             isLoading: true,
             userArr: [],
@@ -71,39 +71,39 @@ class tempScreen extends Component {
                     marginLeft: 20, marginRight: 20, marginTop: 40,
 
                 }}>
-                    <View style={{
-                        height: '40%',
-
-                    }}>
+                    <View >
                         <ChartView></ChartView>
                     </View>
 
                     <View style={{ margin: 20, paddingTop: 15 }}><Text style={styles.listTopText}>検温履歴</Text></View>
-                    {
-                        this.state.userArr.map((item) => {
-                            return (
+                    <View >
+                        <ScrollView style={{ height: 350 }}>
+                            {
+                                this.state.userArr.map((item) => {
+                                    return (
 
-                                <ListItem style={{ marginBottom: 5 }}
+                                        <ListItem style={{ marginBottom: 5 }}
 
-                                    containerStyle={{ backgroundColor: "#fff", borderRadius: 5, }}
+                                            containerStyle={{ backgroundColor: "#fff", borderRadius: 5, }}
 
-                                >
+                                        >
 
-                                    <Avatar source={require('../assets/favicon.png')} />
-                                    <ListItem.Content>
+                                            <Avatar source={require('../assets/favicon.png')} />
+                                            <ListItem.Content>
 
-                                        <ListItem.Title
-                                            style={styles.titleText}
-                                        >{item.temp}</ListItem.Title>
-                                        <ListItem.Subtitle
-                                            style={styles.subText}
-                                        >{item.showdate}</ListItem.Subtitle>
-                                    </ListItem.Content>
-                                </ListItem>
-                            )
-                        })
-                    }
-
+                                                <ListItem.Title
+                                                    style={styles.titleText}
+                                                >{item.temp}</ListItem.Title>
+                                                <ListItem.Subtitle
+                                                    style={styles.subText}
+                                                >{item.showdate}</ListItem.Subtitle>
+                                            </ListItem.Content>
+                                        </ListItem>
+                                    )
+                                })
+                            }
+                        </ScrollView>
+                    </View>
                 </View >
             </View>
 
@@ -134,4 +134,4 @@ const styles = StyleSheet.create({
 
 
 })
-export default tempScreen;
+export default TempScreen;
