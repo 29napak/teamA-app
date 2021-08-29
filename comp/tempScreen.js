@@ -66,7 +66,8 @@ class TempScreen extends Component {
 
         return (
 
-            <View style={{ backgroundColor: "#d8f2ff" }}>
+
+            <View style={{ backgroundColor: "#d8f2ff", height: "100%" }}>
                 <View style={{
                     marginLeft: 20, marginRight: 20, marginTop: 40,
 
@@ -106,6 +107,7 @@ class TempScreen extends Component {
                     </View>
                 </View >
             </View>
+
 
         )
     }

@@ -1,13 +1,12 @@
-// App.js
 
 import * as React from 'react';
 import { Component } from 'react';
-import { View, Image } from 'react-native';
+import { View, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { createAppContainer } from 'react-navigation';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { createMaterialTopTabNavigator, createStackNavigator } from 'react-navigation-tabs';
+import { createMaterialTopTabNavigator } from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import HomeScreen from './comp/HomeScreen';
@@ -15,17 +14,63 @@ import TempScreen from './comp/TempScreen';
 import ShopScreen from './comp/ShopScreen';
 
 
+import Main from './comp/Main';
+
+const CustomTabBarButton = ({ childen, onPress }) => {
+  <TouchableOpacity
+    style={{
+      top: -30,
+      justifyContent: "center",
+      alignItems: 'center',
+    }}
+    onPress={onPress}
+  >
+    <view style={{
+      width: 70,
+      height: 70,
+      borderRadius: 35,
+      backgroundColor: "red"
+
+    }}>
+      {childen}
+    </view>
+  </TouchableOpacity>
+}
+
 
 
 const Tab = createMaterialTopTabNavigator(
   {
-    HomeScreen: {
-      screen: HomeScreen,
+
+
+    ShopScreen: {
+      screen: ShopScreen,
       navigationOptions: {
-        //普通のアイコン
-        tabBarIcon: ({ tintColor }) => <Icon size={24} name="home" color={tintColor} />,
-        title: 'ホーム'
+        //カスタムアイコン
+        tabBarIcon: ({ tintColor }) => <Image source={require('./assets/store-solid.png')} style={{ width: 24, height: 24, tintColor: tintColor }} />,
+        title: 'ショップ'
       }
+    },
+    HomeScreen: { // big plus icon in the middle
+      screen: HomeScreen,
+
+      navigationOptions: {
+
+        //カスタムアイコン
+        tabBarIcon: ({ tintColor }) =>
+
+          <Image source={require('./assets/K.on_logo3.png')}
+            style={{
+
+              width: 50,
+              height: 50,
+              resizeMode: "contain",
+            }} />,
+        title: ""
+
+      }
+
+
     },
     TempScreen: {
       screen: TempScreen,
@@ -35,58 +80,57 @@ const Tab = createMaterialTopTabNavigator(
         title: 'グラフ'
       }
     },
-    ShopScreen: {
-      screen: ShopScreen,
-      navigationOptions: {
-        //カスタムアイコン
-        tabBarIcon: ({ tintColor }) => <Image source={require('./assets/store-solid.png')} style={{ width: 24, height: 24, tintColor: tintColor }} />,
-        title: 'ショップ'
-      }
-    },
+
+
   }, {
   initialRouteName: 'HomeScreen',
-  swipeEnabled: true,
+
 
   tabBarPosition: 'bottom',
   tabBarOptions: {
-    activeTintColor: 'red',
-    inactiveTintColor: 'gray',
+    activeTintColor: '#b46617',
+    inactiveTintColor: '#1f2b14',
+    showLabel: true,
+    showIcon: true,
     style: {
-      backgroundColor: '#ffff'
-    }, indicatorStyle: {
+      position: 'absolute',
+      bottom: 25,
+      left: 20,
+      right: 20,
+      elevation: 0,
+      backgroundColor: "#ffff",
+      borderRadius: 15,
+      height: 70,
+
+    },
+    indicatorStyle: {
       height: 0
     },
-    showIcon: true
-  }
+
+  },
+
+
 }
 );
 
+
+
 export default class App extends React.Component {
+
+
+
   render() {
 
     const Layout = createAppContainer(Tab);
 
+
     return (
+
       <View style={{ flex: 1 }}>
         <Layout />
       </View>
     );
   }
-  // return(
-  //   <NavigationContainer>
-  // <Tab.Navigator
-  //   initialRouteName="Home"
-
-
-  // >
-  //   <Tab.Screen name="Shop" component={Shop}
-
-  //   />
-  //   <Tab.Screen name="Home" component={Home} />
-  //   <Tab.Screen name="Temp" component={Temp} />
-
-  // </Tab.Navigator>
-  //   </NavigationContainer >
-  // );
 }
+
 

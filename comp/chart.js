@@ -23,7 +23,8 @@ export default class ChartView extends React.Component {
             userArr: [],
             point: '',
             date: '',
-            temp: ''
+            temp: '',
+            data: [0, 0, 0, 0, 0]
         }
     }
 
@@ -68,6 +69,8 @@ export default class ChartView extends React.Component {
 
             )
         }
+
+
 
         const tempData = this.state.userArr.map((item, i) => {
 
